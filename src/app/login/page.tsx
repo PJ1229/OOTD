@@ -46,6 +46,9 @@ export default function Home() {
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
         Don't have an account? <a href="/signup" className="text-blue-500">Sign up</a>
       </footer>
+      <footer className="row-start-4 flex gap-6 flex-wrap items-center justify-center">
+          Bypass login here: <a href="/swipe" className="text-blue-500">Swipe Page!</a>
+      </footer>
     </div>
   );
 }

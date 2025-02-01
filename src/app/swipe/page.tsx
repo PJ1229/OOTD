@@ -2,8 +2,8 @@
 'use client';
 
 import React, { useState, useRef } from 'react';
-import styles from '../styles/home.module.css';
-import '../../globals.css';
+import styles from '../../styles/home.module.css';
+import '../../../globals.css';
 
 // Define Outfit type
 interface Outfit {
