@@ -7,7 +7,7 @@ export default function MainPage() {
   const router = useRouter();
 
   useEffect(() => {
-    router.push("/swipe");
+    router.push("/login");
   }, [router]);
 
   return null;
