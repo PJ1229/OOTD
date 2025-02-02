@@ -6,8 +6,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import styles from '../../styles/home.module.css';
 import Navbar from "@/components/Navbar";
 import { useSearchParams } from 'next/navigation';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCamera } from '@fortawesome/free-solid-svg-icons';
 import Image from 'next/image';
 
 export default function UploadPage() {
