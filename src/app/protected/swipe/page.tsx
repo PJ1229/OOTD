@@ -2,7 +2,6 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import styles from "@/styles/home.module.css";
 import Navbar from "@/components/Navbar";
 import { createClient } from "@/utils/supabase/client";
@@ -153,13 +152,31 @@ export default function Home() {
     };
   });
 
-  const handleSwipe = (direction: "left" | "right", outfitName: string) => {
+  const handleSwipe = async (
+    direction: "left" | "right",
+    outfitName: string
+  ) => {
+    const supabase = createClient();
+
     setLastDirection(direction);
     console.log(`Swiped ${direction} on ${outfitName}`);
+    const currentPost = posts[currentIndex];
 
     if (direction === "left") {
+      console.log(currentPost);
+      const { data, error } = await supabase
+        .from("posts")
+        .update({ dislikes: (currentPost.dislikes || 0) + 1 })
+        .eq("id", currentPost.id);
+
+      if (error) console.error("Error updating dislikes:", error);
       setFlashColor("red");
     } else if (direction === "right") {
+      console.log(currentPost);
+      const { data, error } = await supabase
+        .from("posts")
+        .update({ likes: (currentPost.likes || 0) + 1 })
+        .eq("id", currentPost.id);
       setFlashColor("green");
     }
 
@@ -173,16 +190,7 @@ export default function Home() {
     <div
       className={`${styles.container} ${flashColor ? styles[flashColor] : ""}`}
     >
-      <div className={styles.logo}>
-        <Image src="/ootd.svg" alt="OOTD Logo" width={150} height={80} />
-      </div>
-
-      <div className={styles.swipeArrows}>
-        <FaArrowLeft className={styles.arrow} />
-        <span className={styles.swipeText}>Swipe</span>
-        <FaArrowRight className={styles.arrow} />
-      </div>
-
+      <Image src="/ootd.svg" alt="OOTD Logo" width={150} height={80} />
       <div className={styles.cardContainer}>
         {posts.map((post, index) => (
           <SwipeableCard
