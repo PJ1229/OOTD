@@ -301,7 +301,7 @@
 
 .buttonContainer {
   position: absolute;
-  bottom: 5vh; /* Adjusted for better visibility */
+  bottom: 0vh; /* Adjusted for better visibility */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -339,12 +339,22 @@
   transition: background-color 0.3s ease;
 }
 
+.imageContainer2{
+  position: absolute;
+  top: 20px; /* Adjust the top position as needed */
+  left: 20px; /* Adjust the right position as needed */
+  z-index: 1001; /* Ensure it stays above other elements */
+  text-align: center;
+}
+
 .uploadLabel {
   padding: 12px 15px; /* Adjust padding for consistency */
   background-color: transparent;
   color: white;
   border-radius: 5px;
   font-size: 16px;
+  width: 120px; /* Adjusted for uniform size */
+  height: 120px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   filter: invert(1);
