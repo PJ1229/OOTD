@@ -40,7 +40,7 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging) return;
+    if (!isDragging) return;<q></q>
     const deltaX = e.clientX - startPoint.current.x;
     const deltaY = e.clientY - startPoint.current.y;
     setPosition({ x: deltaX, y: deltaY });
