@@ -245,7 +245,6 @@ export default function UploadPage() {
         <div className={styles.imageRow}>
           {capturedImage && (
             <div className={styles.imageContainer}>
-              <h2>{showVideo ? 'Captured Image' : 'Uploaded Image'}</h2>
               <img src={capturedImage} alt="Captured/Uploaded" className={styles.originalImage} />
             </div>
           )}
@@ -284,7 +283,6 @@ export default function UploadPage() {
       {/* Display Updated Image */}
       {updatedImage && !isLoading && (
         <div className={styles.imageContainer}>
-          <h2>Updated Image</h2>
           <img src={updatedImage} alt="Updated" className={styles.updatedImage} />
         </div>
       )}
