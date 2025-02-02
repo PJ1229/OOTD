@@ -4,6 +4,7 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from '../../styles/library.module.css';
+import Navbar from "@/components/Navbar";
 
 // Import the JSON file (replace with your actual path)
 import garments from '../../data/favorites.json';
@@ -19,6 +20,7 @@ export default function LibraryPage() {
           </Link>
         ))}
       </div>
+      <Navbar />
     </div>
   );
 }
