@@ -28,7 +28,6 @@ export default function UploadPage() {
     }
   };
 
-
   // Capture a picture from the video stream
   const capturePicture = async () => {
     if (videoRef.current && canvasRef.current) {

@@ -105,9 +105,6 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <div className={styles.cardLabel}>
-        <h3>{outfit.handle}</h3>
-      </div>
     </div>
   );
 };
