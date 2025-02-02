@@ -39,7 +39,7 @@ export const updateSession = async (request: NextRequest) => {
     }
 
     if (request.nextUrl.pathname === "/" && !user.error) {
-      return NextResponse.redirect(new URL("/protected/feed", request.url));
+      return NextResponse.redirect(new URL("/protected/swipe", request.url));
     }
 
     return response;
