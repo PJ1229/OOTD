@@ -262,7 +262,6 @@ export default function UploadPage() {
           )}
           {garmentImage && (
             <div className={styles.imageContainer}>
-              <h2>Garment Image</h2>
               <img src={garmentImage} alt="Garment" className={styles.originalImage} />
             </div>
           )}

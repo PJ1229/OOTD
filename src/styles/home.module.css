@@ -279,7 +279,7 @@
 
 .buttonContainer {
   position: absolute;
-  bottom: -35vh;
+  bottom: -40vh;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -337,6 +337,10 @@
 }
 
 .imageContainer {
+  position: absolute;
+  top: 20px; /* Adjust the top position as needed */
+  right: 20px; /* Adjust the right position as needed */
+  z-index: 1001; /* Ensure it stays above other elements */
   text-align: center;
 }
 
