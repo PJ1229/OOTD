@@ -41,7 +41,7 @@ export default function Home() {
         </form>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        Don't have an account?{" "}
+        Don&apos;t have an account?{" "}
         <a href="/signup" className="text-blue-500">
           Sign up
         </a>
