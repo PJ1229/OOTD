@@ -25,217 +25,6 @@
   text-align: center;
 }
 
-.cardWrapper {
-  margin-bottom: 20px;
-}
-
-.userHandle {
-  font-weight: bold;
-}
-
-.timestamp {
-  color: #666;
-}
-
-.card {
-  position: relative;
-  width: 341px;
-  height: 559px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  width: 300px;
-  height: 400px;
-  perspective: 1000px;
-  cursor: pointer;
-}
-
-.outfitDetails {
-  margin-top: 10px;
-  font-size: 14px;
-  color: #444;
-}
-
-.outfitDetails p {
-  margin: 5px 0;
-}
-
-.bottomNav {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background-color: #fff;
-  border-top: 1px solid #ccc;
-  padding: 10px 0;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 1000; /* Ensure it stays above other content */
-}
-
-/* Icon Styling */
-.icon {
-  font-size: 24px;
-  color: black;
-  transition: color 0.3s ease, transform 0.2s ease;
-  cursor: pointer;
-}
-
-.icon:hover {
-  color: #0070f3;
-  transform: scale(1.2);
-}
-
-/* Active Link Styling */
-.iconLink:active {
-  color: #0070f3;
-  transform: scale(1.1);
-}
-
-/* Adjust container to prevent content overlap with navbar */
-.container {
-  padding-bottom: 60px; /* Add bottom padding equal to navbar height */
-}
-
-/* Ensure the container takes full viewport height and leaves space for the nav */
-.navContainer {
-  position: relative;
-  min-height: 100vh;
-  padding-bottom: 60px; /* Adjust based on your nav bar height */
-}
-
-/* Navigation bar fixed to the bottom */
-.bottomNav {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 60px;             /* Set the desired height */
-  background-color: #fff;   /* White background */
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);  /* Optional: adds a subtle shadow */
-  z-index: 100;             /* Ensure it appears above other content */
-}
-
-/* Optional: additional styling for the icon if necessary */
-.icon {
-  vertical-align: middle;
-}
-
-/* Container to center everything vertically and horizontally */
-.leaderboardContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background: #f9f9f9; /* Light background color */
-  padding: 1rem;
-}
-
-/* Leaderboard list container */
-.leaderboardList {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-/* Individual leaderboard item */
-.leaderboardItem {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid #eee;
-}
-
-/* Remove the border from the last item */
-.leaderboardItem:last-child {
-  border-bottom: none;
-}
-
-/* Rank, Name, and Score sections */
-.rank, .name, .score {
-  flex: 1;
-}
-
-/* Trophy icon styling */
-.trophyIcon {
-  color: gold;
-  margin-right: 0.5rem;
-}
-
-.logo {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  z-index: 10; /* Make sure it stays on top */
-}
-
-/* Swipe Arrows */
-.swipeArrows {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 15px;
-  margin: 100px 0 20px; /* Space from the logo */
-}
-
-.arrow {
-  font-size: 2rem;
-  color: #333;
-  animation: bounce 1.5s infinite alternate;
-}
-
-/* Add bounce animation for arrows */
-@keyframes bounce {
-  from {
-    transform: translateY(0);
-  }
-  to {
-    transform: translateY(-10px);
-  }
-}
-
-.swipeText {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #555;
-}
-
-.cardContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 20px;
-  padding: 20px;
-}
-
-.card {
-  width: 300px;
-  height: 400px;
-  background-size: cover;
-  background-position: center;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  transition: transform 0.3s ease-out;
-  perspective: 1000px;
-  cursor: pointer;
-}
-
-.direction {
-  margin: 20px 0;
-  font-size: 1.5rem;
-  color: #555;
-}
 /* try on page styling */
 
 .videoContainer {
@@ -265,7 +54,6 @@
   width: auto;
 }
 
-
 .captureButton {
   padding: 15px; /* Slightly reduced padding */
   background-color: transparent;
@@ -280,17 +68,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.resetButton {
-  padding: 20px 20px;
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
 .imageContainer2{
@@ -358,7 +135,7 @@
 
 .loadingSpinner {
   border: 4px solid #f3f3f3;
-  border-top: 4px solid #007bff;
+  border-top: 4px solid #000000;
   border-radius: 50%;
   width: 40px;
   height: 40px;
@@ -375,49 +152,6 @@
   }
 }
 
-.tryAnotherButton {
-  padding: 10px 20px;
-  background-color: #dc3545;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  margin-top: 20px;
-}
-
-.tryAnotherButton:hover {
-  background-color: #c82333;
-}
-
-.circle {
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  background-color: white;
-  border-radius: 50%;
-  cursor: pointer;
-}
-
-.clickedPointName {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(0, 0, 0, 0.7);
-  color: white;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-.red {
-  background-color: rgba(255, 0, 0, 0.5);
-}
-
-.green {
-  background-color: rgba(0, 255, 0, 0.5);
-}
 /* home.module.css */
 .container {
   position: relative;
@@ -444,6 +178,7 @@
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
+
 .red {
   background-color: rgba(255, 0, 0, 0.2);
 }
