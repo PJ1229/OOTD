@@ -1,11 +1,9 @@
-'use client';
+"use client";
 
-import React, { useState, useRef } from 'react';
-import Link from 'next/link';
-import Image from 'next/image';
-import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import styles from '../../styles/home.module.css';
-import '../../../globals.css';
+import React, { useState, useRef } from "react";
+import Image from "next/image";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import styles from "@/styles/home.module.css";
 import Navbar from "@/components/Navbar";
 
 // Outfit type
@@ -17,19 +15,28 @@ interface Outfit {
 // Props for SwipeableCard
 interface SwipeableCardProps {
   outfit: Outfit;
-  onSwipe: (direction: 'left' | 'right', outfitName: string) => void;
+  onSwipe: (direction: "left" | "right", outfitName: string) => void;
 }
 
 const outfits: Outfit[] = [
-  { name: 'Casual Chic', image: 'https://source.unsplash.com/400x600/?casual,style' },
-  { name: 'Formal Elegance', image: 'https://source.unsplash.com/400x600/?formal,wear' },
-  { name: 'Sporty Look', image: 'https://source.unsplash.com/400x600/?sporty' },
+  {
+    name: "Casual Chic",
+    image: "https://source.unsplash.com/400x600/?casual,style",
+  },
+  {
+    name: "Formal Elegance",
+    image: "https://source.unsplash.com/400x600/?formal,wear",
+  },
+  { name: "Sporty Look", image: "https://source.unsplash.com/400x600/?sporty" },
 ];
 
 const SWIPE_THRESHOLD = 100;
 
 const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
-  const [position, setPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [position, setPosition] = useState<{ x: number; y: number }>({
+    x: 0,
+    y: 0,
+  });
   const [isDragging, setIsDragging] = useState(false);
   const cardRef = useRef<HTMLDivElement | null>(null);
   const startPoint = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
@@ -75,10 +82,10 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
   const finishSwipe = () => {
     if (position.x > SWIPE_THRESHOLD) {
       setPosition({ x: 500, y: position.y });
-      onSwipe('right', outfit.name);
+      onSwipe("right", outfit.name);
     } else if (position.x < -SWIPE_THRESHOLD) {
       setPosition({ x: -500, y: position.y });
-      onSwipe('left', outfit.name);
+      onSwipe("left", outfit.name);
     } else {
       setPosition({ x: 0, y: 0 });
     }
@@ -92,7 +99,7 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
       ref={cardRef}
       style={{
         transform: `translate(${position.x}px, ${position.y}px) rotate(${rotate}deg)`,
-        transition: isDragging ? 'none' : 'transform 0.3s ease-out',
+        transition: isDragging ? "none" : "transform 0.3s ease-out",
         backgroundImage: `url(${outfit.image})`,
       }}
       onMouseDown={handleMouseDown}
@@ -114,7 +121,7 @@ export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lastDirection, setLastDirection] = useState<string | null>(null);
 
-  const handleSwipe = (direction: 'left' | 'right', outfitName: string) => {
+  const handleSwipe = (direction: "left" | "right", outfitName: string) => {
     setLastDirection(direction);
     console.log(`Swiped ${direction} on ${outfitName}`);
     setTimeout(() => {
@@ -138,7 +145,11 @@ export default function Home() {
 
       <div className={styles.cardContainer}>
         {outfits.slice(currentIndex).map((outfit) => (
-          <SwipeableCard key={outfit.name} outfit={outfit} onSwipe={handleSwipe} />
+          <SwipeableCard
+            key={outfit.name}
+            outfit={outfit}
+            onSwipe={handleSwipe}
+          />
         ))}
       </div>
 

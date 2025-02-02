@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { signInAction } from "../actions";
 
 export default function Home() {
   return (
@@ -9,13 +10,13 @@ export default function Home() {
 
         <form className="flex flex-col gap-4 items-center sm:items-start">
           <div className="flex flex-col gap-2">
-            <label htmlFor="username" className="text-sm">
-              Username
+            <label htmlFor="email" className="text-sm">
+              Email
             </label>
             <input
               type="text"
               id="username"
-              name="username"
+              name="email"
               className="p-2 border border-gray-300 rounded-md w-72 sm:w-80"
               placeholder="Enter your username"
             />
@@ -34,7 +35,7 @@ export default function Home() {
             />
           </div>
 
-          <Button type="submit" className="w-full">
+          <Button type="submit" className="w-full" formAction={signInAction}>
             Login
           </Button>
         </form>
