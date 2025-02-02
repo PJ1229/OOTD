@@ -1,11 +1,14 @@
-// app/page.tsx
 'use client';
 
 import React, { useState, useRef } from 'react';
+import Link from 'next/link';
+import Image from 'next/image';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import styles from '../../styles/home.module.css';
 import '../../../globals.css';
+import Navbar from "@/components/Navbar";
 
-// Define Outfit type
+// Outfit type
 interface Outfit {
   name: string;
   image: string;
@@ -18,18 +21,9 @@ interface SwipeableCardProps {
 }
 
 const outfits: Outfit[] = [
-  {
-    name: 'Outfit 1',
-    image: '/images/image1.jpeg'
-  },
-  {
-    name: 'Outfit 2',
-    image: '/images/image2.jpg'
-  },
-  {
-    name: 'Outfit 3',
-    image: '/images/image3.jpg'
-  },
+  { name: 'Casual Chic', image: 'https://source.unsplash.com/400x600/?casual,style' },
+  { name: 'Formal Elegance', image: 'https://source.unsplash.com/400x600/?formal,wear' },
+  { name: 'Sporty Look', image: 'https://source.unsplash.com/400x600/?sporty' },
 ];
 
 const SWIPE_THRESHOLD = 100;
@@ -40,7 +34,6 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
   const cardRef = useRef<HTMLDivElement | null>(null);
   const startPoint = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
-  // === Mouse Events ===
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     setIsDragging(true);
     startPoint.current = { x: e.clientX, y: e.clientY };
@@ -59,7 +52,6 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
     finishSwipe();
   };
 
-  // === Touch Events ===
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     setIsDragging(true);
     const touch = e.touches[0];
@@ -80,7 +72,6 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
     finishSwipe();
   };
 
-  // Check if the card was swiped far enough
   const finishSwipe = () => {
     if (position.x > SWIPE_THRESHOLD) {
       setPosition({ x: 500, y: position.y });
@@ -112,17 +103,8 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-    
-    <div className={styles.cardContent}>
-        <div className={styles.cardHeader}>
-          <span className={styles.userHandle}>fakehandlehere</span>
-          </div>
-        <div className={styles.cardLabel}>
-          <div className={styles.outfitDetails}>
-            <p>Fur Coat</p>
-            <p>Leather Boots</p>
-          </div>
-        </div>
+      <div className={styles.cardLabel}>
+        <h3>{outfit.name}</h3>
       </div>
     </div>
   );
@@ -142,13 +124,29 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Rate Outfits</h1>
+      {/* Logo positioned at the top right */}
+      <div className={styles.logo}>
+        <Image src="/ootd.svg" alt="OOTD Logo" width={150} height={80} />
+      </div>
+
+      {/* Swipe arrows instead of title */}
+      <div className={styles.swipeArrows}>
+        <FaArrowLeft className={styles.arrow} />
+        <span className={styles.swipeText}>Swipe</span>
+        <FaArrowRight className={styles.arrow} />
+      </div>
+
       <div className={styles.cardContainer}>
         {outfits.slice(currentIndex).map((outfit) => (
           <SwipeableCard key={outfit.name} outfit={outfit} onSwipe={handleSwipe} />
         ))}
       </div>
-      {lastDirection && <h2 className={styles.direction}>You swiped {lastDirection}</h2>}
+
+      {lastDirection && (
+        <h2 className={styles.direction}>You swiped {lastDirection}</h2>
+      )}
+
+      <Navbar />
     </div>
   );
 }
