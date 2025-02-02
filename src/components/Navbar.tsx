@@ -1,5 +1,11 @@
 import Link from "next/link";
-import { FaTrophy, FaHome, FaPlusSquare, FaStore, FaTshirt } from "react-icons/fa";
+import {
+  FaTrophy,
+  FaHome,
+  FaPlusSquare,
+  FaStore,
+  FaTshirt,
+} from "react-icons/fa";
 import styles from "./Navbar.module.css"; // Adjust the path if your CSS module is elsewhere
 
 export default function Navbar() {

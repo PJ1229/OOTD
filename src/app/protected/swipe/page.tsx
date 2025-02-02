@@ -190,7 +190,7 @@ export default function Home() {
     <div
       className={`${styles.container} ${flashColor ? styles[flashColor] : ""}`}
     >
-      <Image src="/ootd.svg" alt="OOTD Logo" width={150} height={80} />
+      <Image src="/ootd.png" alt="OOTD Logo" width={150} height={80} />
       <div className={styles.cardContainer}>
         {posts.map((post, index) => (
           <SwipeableCard
