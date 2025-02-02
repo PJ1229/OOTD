@@ -312,12 +312,13 @@
 
 .uploadLabel {
   padding: 20px 20px;
-  background-color: #28a745;
+  background-color: transparent;
   color: white;
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  filter: invert(1);
 }
 
 .uploadLabel:hover {

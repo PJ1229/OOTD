@@ -234,7 +234,7 @@ export default function UploadPage() {
           {/* Buttons inside the camera feed */}
           <div className={styles.buttonContainer}>
           <label htmlFor="uploadInput" className={styles.uploadLabel}>
-              Upload Image
+              <Image src="/upload.svg" alt="Upload" width={100} height={100} />
             </label>
             <input
               id="uploadInput"
@@ -246,9 +246,7 @@ export default function UploadPage() {
           <button onClick={capturePicture} className={styles.captureButton}>
             <Image src="/circle.svg" alt="Capture" width={1000} height={1000} />
           </button>
-            <button onClick={resetPage} className={styles.resetButton}>
-              Saved Outfits
-            </button>
+            
           </div>
         </div>
       )}
