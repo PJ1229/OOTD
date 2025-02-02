@@ -95,7 +95,7 @@ export default function UploadPage() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Capture or Upload Picture</h1>
+      <h1 className={styles.title}> Image Successfully Captured! </h1>
 
       {/* Video Feed */}
       {showVideo && (
