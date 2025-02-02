@@ -2,8 +2,9 @@
 
 import React, { useState, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import styles from '../../styles/home.module.css';
-import { FaTrophy, FaHome, FaPlusSquare, FaStore, FaCamera } from 'react-icons/fa'; // Importing icons
 import '../../../globals.css';
 import Navbar from "@/components/Navbar";
 
@@ -123,15 +124,28 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Rate Outfits</h1>
+      {/* Logo positioned at the top right */}
+      <div className={styles.logo}>
+        <Image src="/ootd.svg" alt="OOTD Logo" width={150} height={80} />
+      </div>
+
+      {/* Swipe arrows instead of title */}
+      <div className={styles.swipeArrows}>
+        <FaArrowLeft className={styles.arrow} />
+        <span className={styles.swipeText}>Swipe</span>
+        <FaArrowRight className={styles.arrow} />
+      </div>
+
       <div className={styles.cardContainer}>
         {outfits.slice(currentIndex).map((outfit) => (
           <SwipeableCard key={outfit.handle} outfit={outfit} onSwipe={handleSwipe} />
         ))}
       </div>
-      {lastDirection && <h2 className={styles.direction}>You swiped {lastDirection}</h2>}
 
-      {/* Bottom Navigation Bar */}
+      {lastDirection && (
+        <h2 className={styles.direction}>You swiped {lastDirection}</h2>
+      )}
+
       <Navbar />
     </div>
   );

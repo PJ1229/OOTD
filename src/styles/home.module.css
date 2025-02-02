@@ -78,7 +78,6 @@
   margin: 5px 0;
 }
 
-/* Bottom Navigation Bar */
 .bottomNav {
   display: flex;
   justify-content: space-around;
@@ -118,7 +117,7 @@
 }
 
 /* Ensure the container takes full viewport height and leaves space for the nav */
-.container {
+.navContainer {
   position: relative;
   min-height: 100vh;
   padding-bottom: 60px; /* Adjust based on your nav bar height */
@@ -139,14 +138,246 @@
   z-index: 100;             /* Ensure it appears above other content */
 }
 
-/* Styling for each icon link */
-.iconLink {
-  text-decoration: none;
-  color: #000;              /* Black icons */
-  font-size: 24px;          /* Adjust icon size if needed */
-}
-
 /* Optional: additional styling for the icon if necessary */
 .icon {
   vertical-align: middle;
+}
+
+/* Container to center everything vertically and horizontally */
+.leaderboardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #f9f9f9; /* Light background color */
+  padding: 1rem;
+}
+
+/* Leaderboard list container */
+.leaderboardList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Individual leaderboard item */
+.leaderboardItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+/* Remove the border from the last item */
+.leaderboardItem:last-child {
+  border-bottom: none;
+}
+
+/* Rank, Name, and Score sections */
+.rank, .name, .score {
+  flex: 1;
+}
+
+/* Trophy icon styling */
+.trophyIcon {
+  color: gold;
+  margin-right: 0.5rem;
+}
+
+.logo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10; /* Make sure it stays on top */
+}
+
+/* Swipe Arrows */
+.swipeArrows {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin: 100px 0 20px; /* Space from the logo */
+}
+
+.arrow {
+  font-size: 2rem;
+  color: #333;
+  animation: bounce 1.5s infinite alternate;
+}
+
+/* Add bounce animation for arrows */
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+.swipeText {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  width: 300px;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  transition: transform 0.3s ease-out;
+}
+
+.cardLabel {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.direction {
+  margin: 20px 0;
+  font-size: 1.5rem;
+  color: #555;
+}
+/* try on page styling */
+
+.videoContainer {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.video {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.buttonContainer {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 10px;
+}
+
+.captureButton {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.captureButton:hover {
+  background-color: #0056b3;
+}
+
+.uploadLabel {
+  padding: 10px 20px;
+  background-color: #28a745;
+  color: white;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.uploadLabel:hover {
+  background-color: #218838;
+}
+
+.uploadInput {
+  display: none; /* Hide the default file input */
+}
+
+.imageRow {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Space between images */
+  margin-top: 20px;
+}
+
+.imageContainer {
+  text-align: center;
+}
+
+.originalImage {
+  max-width: 200px; /* Smaller size for the captured/uploaded image */
+  max-height: 200px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+.updatedImage {
+  max-width: 400px; /* Larger size for the updated image */
+  max-height: 400px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  object-fit: cover;
+}
+
+.loadingContainer {
+  margin-top: 20px;
+}
+
+.loadingSpinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.tryAnotherButton {
+  padding: 10px 20px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.tryAnotherButton:hover {
+  background-color: #c82333;
 }
