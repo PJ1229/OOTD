@@ -14,7 +14,7 @@ export default function Navbar() {
       <Link href="/swipe" className={styles.iconLink}>
         <FaHome className={styles.icon} />
       </Link>
-      <Link href="/market" className={styles.iconLink}>
+      <Link href="/shop" className={styles.iconLink}>
         <FaStore className={styles.icon} />
       </Link>
       <Link href="/favorites" className={styles.iconLink}>
