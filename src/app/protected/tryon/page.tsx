@@ -3,9 +3,10 @@
 import 'dotenv/config';
 
 import React, { useState, useRef, useEffect } from 'react';
-import styles from '../../styles/home.module.css';
+import styles from '@/styles/home.module.css';
 import Navbar from "@/components/Navbar";
 import { useSearchParams } from 'next/navigation';
+import Image from 'next/image';
 
 export default function UploadPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -81,6 +82,7 @@ export default function UploadPage() {
       // Set canvas dimensions to match the video feed
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
+      
 
       // Draw the current frame from the video onto the canvas
       context?.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -231,11 +233,8 @@ export default function UploadPage() {
 
           {/* Buttons inside the camera feed */}
           <div className={styles.buttonContainer}>
-            <button onClick={capturePicture} className={styles.captureButton}>
-              Capture
-            </button>
-            <label htmlFor="uploadInput" className={styles.uploadLabel}>
-              Upload Image
+          <label htmlFor="uploadInput" className={styles.uploadLabel}>
+              <Image src="/upload.svg" alt="Upload" width={100} height={100} />
             </label>
             <input
               id="uploadInput"
@@ -244,6 +243,10 @@ export default function UploadPage() {
               onChange={handleImageUpload}
               className={styles.uploadInput}
             />
+          <button onClick={capturePicture} className={styles.captureButton}>
+            <Image src="/circle.svg" alt="Capture" width={100} height={100} />
+          </button>
+            
           </div>
         </div>
       )}
@@ -259,7 +262,6 @@ export default function UploadPage() {
           )}
           {garmentImage && (
             <div className={styles.imageContainer}>
-              <h2>Garment Image</h2>
               <img src={garmentImage} alt="Garment" className={styles.originalImage} />
             </div>
           )}
