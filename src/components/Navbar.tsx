@@ -5,28 +5,21 @@ import styles from "./Navbar.module.css"; // Adjust the path if your CSS module 
 export default function Navbar() {
   return (
     <nav className={styles.bottomNav}>
-      <Link href="/leaderboard" className={styles.iconLink}>
+    <Link href="/leaderboard" className={styles.iconLink}>
         <FaTrophy className={styles.icon} />
-      </Link>
-      <Link href="/tryon" className={styles.iconLink}>
+    </Link>
+    <Link href="/add" className={styles.iconLink}>
         <FaPlusSquare className={styles.icon} />
-      </Link>
-      <Link href="/swipe" className={styles.iconLink}>
+    </Link>
+    <Link href="/swipe" className={styles.iconLink}>
         <FaHome className={styles.icon} />
-      </Link>
-<<<<<<< HEAD
-      <Link href="/add" className={styles.iconLink}>
-        <FaPlusSquare className={styles.icon} />
-      </Link>
-      <Link href="/shop" className={styles.iconLink}>
-=======
-      <Link href="/market" className={styles.iconLink}>
->>>>>>> main
+    </Link>
+    <Link href="/market" className={styles.iconLink}>
         <FaStore className={styles.icon} />
-      </Link>
-      <Link href="/favorites" className={styles.iconLink}>
+    </Link>
+    <Link href="/favorites" className={styles.iconLink}>
         <FaTshirt className={styles.icon} />
-      </Link>
+    </Link>
     </nav>
   );
 }
