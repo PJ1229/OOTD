@@ -138,14 +138,14 @@ export default function Home() {
       )
       .subscribe();
 
-    const fetchDisasters = async () => {
+    const fetchPosts = async () => {
       const { data, error } = await supabase.from("posts").select("*");
       if (data) {
         setPosts(data);
       }
       if (error) console.error("Error fetching posts:", error);
     };
-    fetchDisasters();
+    fetchPosts();
 
     return () => {
       supabase.removeChannel(channel);
