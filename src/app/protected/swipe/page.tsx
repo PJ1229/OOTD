@@ -8,8 +8,9 @@ import Navbar from "@/components/Navbar";
 
 // Outfit type
 interface Outfit {
-  name: string;
+  handle: string;
   image: string;
+  points: { [key: string]: [number, number] };
 }
 
 // Props for SwipeableCard
@@ -19,15 +20,21 @@ interface SwipeableCardProps {
 }
 
 const outfits: Outfit[] = [
-  {
-    name: "Casual Chic",
-    image: "https://source.unsplash.com/400x600/?casual,style",
+  { 
+    handle: 'chillguy', 
+    image: '/images/image1.jpeg',
+    points: { "xyz": [10, 30], "abc": [20, 40] } 
   },
-  {
-    name: "Formal Elegance",
-    image: "https://source.unsplash.com/400x600/?formal,wear",
+  { 
+    handle: 'fancyguy23', 
+    image: '/images/image2.jpg',
+    points: { "def": [15, 25], "ghi": [35, 45] } 
   },
-  { name: "Sporty Look", image: "https://source.unsplash.com/400x600/?sporty" },
+  { 
+    handle: 'lebron', 
+    image: '/images/image3.jpg',
+    points: { "jkl": [5, 10], "mno": [50, 60] } 
+  },
 ];
 
 const SWIPE_THRESHOLD = 100;
@@ -82,10 +89,10 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
   const finishSwipe = () => {
     if (position.x > SWIPE_THRESHOLD) {
       setPosition({ x: 500, y: position.y });
-      onSwipe("right", outfit.name);
+      onSwipe("right", outfit.handle);
     } else if (position.x < -SWIPE_THRESHOLD) {
       setPosition({ x: -500, y: position.y });
-      onSwipe("left", outfit.name);
+      onSwipe("left", outfit.handle);
     } else {
       setPosition({ x: 0, y: 0 });
     }
@@ -111,7 +118,7 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
       onTouchEnd={handleTouchEnd}
     >
       <div className={styles.cardLabel}>
-        <h3>{outfit.name}</h3>
+        <h3>{outfit.handle}</h3>
       </div>
     </div>
   );
@@ -120,23 +127,30 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
 export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lastDirection, setLastDirection] = useState<string | null>(null);
+  const [flashColor, setFlashColor] = useState<string | null>(null);
 
   const handleSwipe = (direction: "left" | "right", outfitName: string) => {
     setLastDirection(direction);
     console.log(`Swiped ${direction} on ${outfitName}`);
+
+    if (direction === "left") {
+      setFlashColor("red");
+    } else if (direction === "right") {
+      setFlashColor("green");
+    }
+
     setTimeout(() => {
       setCurrentIndex((prev) => prev + 1);
+      setFlashColor(null)
     }, 300);
   };
 
   return (
-    <div className={styles.container}>
-      {/* Logo positioned at the top right */}
+    <div className={`${styles.container} ${flashColor ? styles[flashColor] : ''}`}>
       <div className={styles.logo}>
         <Image src="/ootd.svg" alt="OOTD Logo" width={150} height={80} />
       </div>
 
-      {/* Swipe arrows instead of title */}
       <div className={styles.swipeArrows}>
         <FaArrowLeft className={styles.arrow} />
         <span className={styles.swipeText}>Swipe</span>
@@ -146,7 +160,7 @@ export default function Home() {
       <div className={styles.cardContainer}>
         {outfits.slice(currentIndex).map((outfit) => (
           <SwipeableCard
-            key={outfit.name}
+            key={outfit.handle}
             outfit={outfit}
             onSwipe={handleSwipe}
           />
