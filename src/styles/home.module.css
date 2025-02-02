@@ -301,7 +301,7 @@
 
 .buttonContainer {
   position: absolute;
-  bottom: 0vh; /* Adjusted for better visibility */
+  bottom: 10vh; /* Adjusted for better visibility */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
