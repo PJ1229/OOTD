@@ -288,7 +288,7 @@
 
 .captureButton {
   padding: 20px 20px;
-  background-color: #007bff;
+  background-color: transparent;
   background-image: url(/public/images/circle.png);
   color: white;
   border: none;
@@ -296,6 +296,7 @@
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  filter: invert(1);
 }
 
 .resetButton {
@@ -307,10 +308,6 @@
   font-size: 16px;
   cursor: pointer;
   transition: background-color 0.3s ease;
-}
-
-.captureButton:hover {
-  background-color: #0056b3;
 }
 
 .uploadLabel {

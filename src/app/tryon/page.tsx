@@ -6,6 +6,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import styles from '../../styles/home.module.css';
 import Navbar from "@/components/Navbar";
 import { useSearchParams } from 'next/navigation';
+import Image from 'next/image';
 
 export default function UploadPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -243,7 +244,7 @@ export default function UploadPage() {
               className={styles.uploadInput}
             />
           <button onClick={capturePicture} className={styles.captureButton}>
-            Capture Image
+            <Image src="/circle.svg" alt="Button" width={100} height={100} />
           </button>
             <button onClick={resetPage} className={styles.resetButton}>
               Saved Outfits
