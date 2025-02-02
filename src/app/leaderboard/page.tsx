@@ -1,40 +1,75 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
-import styles from '../../styles/home.module.css'; 
-import { FaTrophy } from 'react-icons/fa';
+import Image from 'next/image';
 import '../../../globals.css';
 import Navbar from "@/components/Navbar";
 
-// Dummy leaderboard data
-const leaderboardData = [
-  { rank: 1, name: "Alice", score: 1500 },
-  { rank: 2, name: "Bob", score: 1300 },
-  { rank: 3, name: "Charlie", score: 1200 },
-  { rank: 4, name: "David", score: 1100 },
-  { rank: 5, name: "Eve", score: 1000 },
+
+// Outfit type
+interface Outfit {
+  name: string;
+  image: string;
+  handle: string;
+}
+
+const outfits: Outfit[] = [
+  { name: 'Casual Chic', image: 'https://source.unsplash.com/400x600/?casual,style', handle: '@casualguru' },
+  { name: 'Formal Elegance', image: 'https://source.unsplash.com/400x600/?formal,wear', handle: '@formalqueen' },
+  { name: 'Sporty Look', image: 'https://source.unsplash.com/400x600/?sporty', handle: '@sportypro' },
 ];
+
+const SWIPE_THRESHOLD = 100;
+
+const LeaderboardCard: React.FC<{ outfit: Outfit; rank: number }> = ({ outfit, rank }) => {
+  return (
+    <div className="relative bg-white rounded-xl shadow-md p-2 mb-4 w-80 mx-auto">
+      {/* Rank Badge */}
+      <div
+        className={`absolute top-2 left-2 text-white font-bold px-3 py-1 rounded-full ${
+          rank === 1 ? 'bg-yellow-400' : 'bg-gray-400'
+        }`}
+      >
+        #{rank}
+      </div>
+
+      {/* Outfit Image */}
+      <div
+        className="h-96 w-full rounded-xl bg-cover bg-center"
+        style={{ backgroundImage: `url(${outfit.image})` }}
+      ></div>
+
+      {/* User Handle */}
+      <p className="text-center font-semibold mt-2">{outfit.handle}</p>
+    </div>
+  );
+};
 
 export default function Leaderboard() {
   return (
-    <div className={styles.leaderboardContainer}>
-      <Navbar />
-      <div className={styles.content}>
-        <h1 className={styles.title}>Leaderboard</h1>
-        <div className={styles.leaderboardList}>
-          {leaderboardData.map((entry) => (
-            <div key={entry.rank} className={styles.leaderboardItem}>
-              <div className={styles.rank}>
-                {entry.rank === 1 && <FaTrophy className={styles.trophyIcon} />}
-                {entry.rank}
-              </div>
-              <div className={styles.name}>{entry.name}</div>
-              <div className={styles.score}>{entry.score}</div>
-            </div>
-          ))}
-        </div>
+    <div className="min-h-screen bg-white pb-20">
+      {/* Logo */}
+      <div className="flex justify-center mt-4">
+        <Image src="/ootd.svg" alt="OOTD" width={200} height={100} />
       </div>
+
+      {/* Leaderboard */}
+      <div className="mt-4">
+        {outfits.map((outfit, index) => (
+          <LeaderboardCard key={outfit.name} outfit={outfit} rank={index + 1} />
+        ))}
+      </div>
+
+      {/* Bottom Navigation Bar */}
+      <nav className="fixed bottom-0 left-0 right-0 bg-white shadow-md flex justify-around items-center p-4">
+        <Link href="/leaderboard" className="text-black font-medium hover:text-blue-500">Leaderboard</Link>
+        <Link href="/" className="text-black font-medium hover:text-blue-500">Home</Link>
+        <Link href="/add" className="text-black font-medium hover:text-blue-500">Add Outfit</Link>
+        <Link href="/market" className="text-black font-medium hover:text-blue-500">Shop</Link>
+        <Link href="/camera" className="text-black font-medium hover:text-blue-500">Camera</Link>
+      </nav>
+      <Navbar />
     </div>
   );
 }

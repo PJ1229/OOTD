@@ -3,7 +3,6 @@
 import React, { useState, useRef } from 'react';
 import Link from 'next/link';
 import styles from '../../styles/home.module.css';
-import { FaTrophy, FaHome, FaPlusSquare, FaStore, FaCamera } from 'react-icons/fa'; // Importing icons
 import '../../../globals.css';
 import Navbar from "@/components/Navbar";
 
@@ -130,9 +129,8 @@ export default function Home() {
         ))}
       </div>
       {lastDirection && <h2 className={styles.direction}>You swiped {lastDirection}</h2>}
-
-      {/* Bottom Navigation Bar */}
-      <Navbar />
+      
+      <Navbar /> 
     </div>
   );
 }
