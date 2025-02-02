@@ -14,7 +14,7 @@ export default function Navbar() {
       <Link href="/add" className={styles.iconLink}>
         <FaPlusSquare className={styles.icon} />
       </Link>
-      <Link href="/market" className={styles.iconLink}>
+      <Link href="/shop" className={styles.iconLink}>
         <FaStore className={styles.icon} />
       </Link>
       <Link href="/camera" className={styles.iconLink}>
