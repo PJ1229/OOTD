@@ -63,7 +63,9 @@ export default function UploadPage() {
   // Access the camera and start the video stream 
   const startCamera = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: { exact: 'environment' } }
+      });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
@@ -205,17 +207,6 @@ export default function UploadPage() {
     }
   };
 
-  // Reset the page to its original state
-  const resetPage = () => {
-    setCapturedImage(null);
-    setGarmentImage(null);
-    setUpdatedImage(null);
-    setShowVideo(true);
-    setShowUploadGarment(false);
-    setTaskId(null);
-    startCamera(); // Restart the camera
-  };
-
   // Start the camera when the component mounts
   useEffect(() => {
     startCamera();
@@ -223,7 +214,7 @@ export default function UploadPage() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Capture or Upload Picture</h1>
+      <h1 className={styles.title}>Image Sucessfully Captured!</h1>
 
       {/* Video Feed */}
       {showVideo && (
@@ -234,7 +225,7 @@ export default function UploadPage() {
           {/* Buttons inside the camera feed */}
           <div className={styles.buttonContainer}>
           <label htmlFor="uploadInput" className={styles.uploadLabel}>
-              <Image src="/upload.svg" alt="Upload" width={100} height={100} />
+              <Image src="/upload.svg" alt="Upload" width={150} height={150} />
             </label>
             <input
               id="uploadInput"
@@ -244,7 +235,7 @@ export default function UploadPage() {
               className={styles.uploadInput}
             />
           <button onClick={capturePicture} className={styles.captureButton}>
-            <Image src="/circle.svg" alt="Capture" width={100} height={100} />
+            <Image src="/circle.svg" alt="Capture" width={150} height={150} />
           </button>
             
           </div>
@@ -256,12 +247,11 @@ export default function UploadPage() {
         <div className={styles.imageRow}>
           {capturedImage && (
             <div className={styles.imageContainer}>
-              <h2>{showVideo ? 'Captured Image' : 'Uploaded Image'}</h2>
               <img src={capturedImage} alt="Captured/Uploaded" className={styles.originalImage} />
             </div>
           )}
           {garmentImage && (
-            <div className={styles.imageContainer}>
+            <div className={styles.imageContainer2}>
               <img src={garmentImage} alt="Garment" className={styles.originalImage} />
             </div>
           )}
@@ -295,17 +285,10 @@ export default function UploadPage() {
       {/* Display Updated Image */}
       {updatedImage && !isLoading && (
         <div className={styles.imageContainer}>
-          <h2>Updated Image</h2>
           <img src={updatedImage} alt="Updated" className={styles.updatedImage} />
         </div>
       )}
-
-      {/* Try Another Fit Button */}
-      {updatedImage && !isLoading && (
-        <button onClick={resetPage} className={styles.tryAnotherButton}>
-          Try Another Fit
-        </button>
-      )}
+      
       <Navbar />
     </div>
   );

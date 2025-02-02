@@ -17,14 +17,17 @@ export default function UploadPage() {
   // Access the camera and start the video stream
   const startCamera = async () => {
     try {
-      const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { facingMode: { exact: 'environment' } }
+      });
       if (videoRef.current) {
         videoRef.current.srcObject = stream;
       }
     } catch (error) {
-      console.error("Error accessing the camera:", error);
+      console.error('Error accessing the camera:', error);
     }
   };
+
 
   // Capture a picture from the video stream
   const capturePicture = async () => {
@@ -95,7 +98,7 @@ export default function UploadPage() {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Capture or Upload Picture</h1>
+      <h1 className={styles.title}> Image Successfully Captured! </h1>
 
       {/* Video Feed */}
       {showVideo && (
