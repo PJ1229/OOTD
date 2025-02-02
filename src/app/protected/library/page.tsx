@@ -17,7 +17,7 @@ export default function LibraryPage() {
         {garments.map((garment) => (
           <Link
             key={garment.id}
-            href={`/tryon?garment=${garment.image}`}
+            href={`/protected/tryon?garment=${garment.image}`}
             className={styles.card}
           >
             <img

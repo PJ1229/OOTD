@@ -8,7 +8,7 @@ export default function Navbar() {
       <Link href="/protected/leaderboard" className={styles.iconLink}>
         <FaTrophy className={styles.icon} />
       </Link>
-      <Link href="/protected/tryon" className={styles.iconLink}>
+      <Link href="/protected/upload" className={styles.iconLink}>
         <FaPlusSquare className={styles.icon} />
       </Link>
       <Link href="/protected/swipe" className={styles.iconLink}>
