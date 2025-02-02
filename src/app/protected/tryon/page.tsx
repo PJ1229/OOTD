@@ -292,20 +292,6 @@ export default function UploadPage() {
         </div>
       )}
 
-      {/* Display Updated Image */}
-      {updatedImage && !isLoading && (
-        <div className={styles.imageContainer}>
-          <h2>Updated Image</h2>
-          <img src={updatedImage} alt="Updated" className={styles.updatedImage} />
-        </div>
-      )}
-
-      {/* Try Another Fit Button */}
-      {updatedImage && !isLoading && (
-        <button onClick={resetPage} className={styles.tryAnotherButton}>
-          Try Another Fit
-        </button>
-      )}
       <Navbar />
     </div>
   );
