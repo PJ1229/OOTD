@@ -4,6 +4,7 @@ import 'dotenv/config';
 
 import React, { useState, useRef, useEffect } from 'react';
 import styles from '../../styles/home.module.css';
+import Navbar from "@/components/Navbar";
 
 export default function UploadPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -251,6 +252,7 @@ export default function UploadPage() {
           Try Another Fit
         </button>
       )}
+      <Navbar />
     </div>
   );
 }

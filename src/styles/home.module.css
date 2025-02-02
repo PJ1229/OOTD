@@ -117,7 +117,7 @@
 }
 
 /* Ensure the container takes full viewport height and leaves space for the nav */
-.container {
+.navContainer {
   position: relative;
   min-height: 100vh;
   padding-bottom: 60px; /* Adjust based on your nav bar height */
@@ -136,15 +136,6 @@
   align-items: center;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);  /* Optional: adds a subtle shadow */
   z-index: 100;             /* Ensure it appears above other content */
-}
-
-/* Styling for each icon link */
-
-
-Link {
-  text-decoration: none;
-  color: #000;              /* Black icons */
-  font-size: 24px;          /* Adjust icon size if needed */
 }
 
 /* Optional: additional styling for the icon if necessary */

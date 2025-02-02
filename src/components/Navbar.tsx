@@ -11,7 +11,7 @@ export default function Navbar() {
       <Link href="/swipe" className={styles.iconLink}>
         <FaHome className={styles.icon} />
       </Link>
-      <Link href="/add" className={styles.iconLink}>
+      <Link href="/tryon" className={styles.iconLink}>
         <FaPlusSquare className={styles.icon} />
       </Link>
       <Link href="/market" className={styles.iconLink}>
