@@ -1,0 +1,73 @@
+/* Container for the whole shop page */
+.shopContainer {
+    padding: 20px;
+    background-color: #f9f9f9;
+    min-height: 100vh; /* Ensures full height */
+    box-sizing: border-box;
+    padding-bottom: 80px; /* Space for the fixed navbar */
+  }
+  
+  /* Shop Header */
+  .shopHeader {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  /* Product Grid */
+  .productGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  
+  /* Individual Product Card */
+  .productCard {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  
+  .productCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Product Image */
+  .productImage {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+  }
+  
+  /* Product Details */
+  .productDetails {
+    padding: 15px;
+    text-align: center;
+  }
+  
+  .productTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #222;
+    margin-bottom: 10px;
+  }
+  
+  .productPrice {
+    font-size: 1rem;
+    color: #0070f3; /* Blue color for price */
+    font-weight: bold;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 600px) {
+    .productGrid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
