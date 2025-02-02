@@ -22,7 +22,6 @@ export default function LibraryPage() {
           >
             <img
               src={garment.image}
-              alt={`Garment ${garment.id}`}
               className={styles.image}
             />
           </Link>
