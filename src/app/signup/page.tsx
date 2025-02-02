@@ -1,4 +1,6 @@
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import { signUpAction } from "../actions";
 
 export default function SignUp() {
   return (
@@ -7,19 +9,6 @@ export default function SignUp() {
         <Image src="/ootd.svg" alt="OOTD" width={200} height={100} />
 
         <form className="flex flex-col gap-4 items-center sm:items-start">
-          <div className="flex flex-col gap-2">
-            <label htmlFor="username" className="text-sm">
-              Username
-            </label>
-            <input
-              type="text"
-              id="username"
-              name="username"
-              className="p-2 border border-gray-300 rounded-md w-72 sm:w-80"
-              placeholder="Enter your username"
-            />
-          </div>
-
           <div className="flex flex-col gap-2">
             <label htmlFor="email" className="text-sm">
               Email
@@ -46,25 +35,9 @@ export default function SignUp() {
             />
           </div>
 
-          <div className="flex flex-col gap-2">
-            <label htmlFor="confirm-password" className="text-sm">
-              Confirm Password
-            </label>
-            <input
-              type="password"
-              id="confirm-password"
-              name="confirm-password"
-              className="p-2 border border-gray-300 rounded-md w-72 sm:w-80"
-              placeholder="Confirm your password"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="bg-black text-white rounded-full h-10 w-72 sm:w-80 mt-4 hover:bg-gray-800 transition-colors"
-          >
+          <Button type="submit" className="w-full" formAction={signUpAction}>
             Sign Up
-          </button>
+          </Button>
         </form>
       </main>
 
