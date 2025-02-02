@@ -6,11 +6,11 @@ import styles from "@/styles/home.module.css";
 import Navbar from "@/components/Navbar";
 import { createClient } from "@/utils/supabase/client";
 
-// Outfit type
+// Define the Outfit type
 interface Outfit {
   handle: string;
   image: string;
-  points: { [key: string]: [number, number] };
+  points?: { [key: string]: [number, number] };
 }
 
 // Props for SwipeableCard
@@ -27,9 +27,9 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
     y: 0,
   });
   const [isDragging, setIsDragging] = useState(false);
-  const cardRef = useRef<HTMLDivElement | null>(null);
   const startPoint = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
 
+  // Mouse event handlers
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
     setIsDragging(true);
     startPoint.current = { x: e.clientX, y: e.clientY };
@@ -48,6 +48,7 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
     finishSwipe();
   };
 
+  // Touch event handlers
   const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     setIsDragging(true);
     const touch = e.touches[0];
@@ -68,33 +69,38 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
     finishSwipe();
   };
 
+  // Decide what to do when the drag ends
   const finishSwipe = () => {
     if (position.x > SWIPE_THRESHOLD) {
-      setPosition({ x: 500, y: position.y });
+      // If swiped right, animate completely off-screen to the right.
+      setPosition({ x: window.innerWidth, y: position.y });
       onSwipe("right", outfit.handle);
     } else if (position.x < -SWIPE_THRESHOLD) {
-      setPosition({ x: -500, y: position.y });
+      // If swiped left, animate off-screen to the left.
+      setPosition({ x: -window.innerWidth, y: position.y });
       onSwipe("left", outfit.handle);
     } else {
+      // Otherwise, reset the card back to center.
       setPosition({ x: 0, y: 0 });
     }
   };
 
+  // Rotate the card a little based on how far it's dragged
   const rotate = position.x / 20;
 
   return (
     <div
       className={styles.card}
-      ref={cardRef}
       style={{
-        transform: `translate(${position.x}px, ${position.y}px) rotate(${rotate}deg)`,
+        // Combine the centering with dynamic dragging and rotation.
+        transform: `translate(calc(-50% + ${position.x}px), calc(-50% + ${position.y}px)) rotate(${rotate}deg)`,
         transition: isDragging ? "none" : "transform 0.3s ease-out",
         backgroundImage: `url(${outfit.image})`,
       }}
       onMouseDown={handleMouseDown}
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
+      onMouseLeave={handleMouseUp} // in case the mouse leaves mid-drag
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
@@ -108,13 +114,13 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
 
 export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [lastDirection, setLastDirection] = useState<string | null>(null);
   const [flashColor, setFlashColor] = useState<string | null>(null);
-  const [posts, setPosts] = useState([]);
+  const [posts, setPosts] = useState<any[]>([]);
 
   useEffect(() => {
     const supabase = createClient();
 
+    // Subscribe to real-time changes
     const channel = supabase
       .channel("posts_changes")
       .on(
@@ -138,6 +144,7 @@ export default function Home() {
       )
       .subscribe();
 
+    // Fetch the initial posts
     const fetchPosts = async () => {
       const { data, error } = await supabase.from("posts").select("*");
       if (data) {
@@ -145,12 +152,14 @@ export default function Home() {
       }
       if (error) console.error("Error fetching posts:", error);
     };
+
     fetchPosts();
 
+    // Clean up the subscription on unmount.
     return () => {
       supabase.removeChannel(channel);
     };
-  });
+  }, []);
 
   const handleSwipe = async (
     direction: "left" | "right",
@@ -158,28 +167,28 @@ export default function Home() {
   ) => {
     const supabase = createClient();
 
-    setLastDirection(direction);
     console.log(`Swiped ${direction} on ${outfitName}`);
     const currentPost = posts[currentIndex];
+    if (!currentPost) return;
 
+    // Update the like/dislike count in Supabase
     if (direction === "left") {
-      console.log(currentPost);
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("posts")
         .update({ dislikes: (currentPost.dislikes || 0) + 1 })
         .eq("id", currentPost.id);
-
       if (error) console.error("Error updating dislikes:", error);
       setFlashColor("red");
     } else if (direction === "right") {
-      console.log(currentPost);
-      const { data, error } = await supabase
+      const { error } = await supabase
         .from("posts")
         .update({ likes: (currentPost.likes || 0) + 1 })
         .eq("id", currentPost.id);
+      if (error) console.error("Error updating likes:", error);
       setFlashColor("green");
     }
 
+    // Wait for the swipe animation to complete before showing the next card.
     setTimeout(() => {
       setCurrentIndex((prev) => prev + 1);
       setFlashColor(null);
@@ -187,22 +196,22 @@ export default function Home() {
   };
 
   return (
-    <div
-      className={`${styles.container} ${flashColor ? styles[flashColor] : ""}`}
-    >
+    <div className={`${styles.container} ${flashColor ? styles[flashColor] : ""}`}>
       <Image src="/ootd.svg" alt="OOTD Logo" width={150} height={80} />
       <div className={styles.cardContainer}>
-        {posts.map((post, index) => (
+        {posts[currentIndex] ? (
           <SwipeableCard
-            key={index}
+            key={posts[currentIndex].id} // Ensure a fresh mount for each card.
             outfit={{
-              image: post.image,
+              handle: posts[currentIndex].handle,
+              image: posts[currentIndex].image,
             }}
             onSwipe={handleSwipe}
           />
-        ))}
+        ) : (
+          <p>No more posts!</p>
+        )}
       </div>
-
       <Navbar />
     </div>
   );
