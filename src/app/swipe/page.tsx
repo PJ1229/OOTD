@@ -14,7 +14,7 @@ interface Outfit {
 // Props for SwipeableCard
 interface SwipeableCardProps {
   outfit: Outfit;
-  onSwipe: (direction: 'left' | 'right') => void;
+  onSwipe: (direction: 'left' | 'right', outfitName: string) => void;
 }
 
 const outfits: Outfit[] = [
@@ -84,10 +84,10 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
   const finishSwipe = () => {
     if (position.x > SWIPE_THRESHOLD) {
       setPosition({ x: 500, y: position.y });
-      onSwipe('right');
+      onSwipe('right', outfit.name);
     } else if (position.x < -SWIPE_THRESHOLD) {
       setPosition({ x: -500, y: position.y });
-      onSwipe('left');
+      onSwipe('left', outfit.name);
     } else {
       setPosition({ x: 0, y: 0 });
     }
