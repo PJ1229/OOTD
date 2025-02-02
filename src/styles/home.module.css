@@ -292,8 +292,9 @@
   background-image: url(/public/images/circle.png);
   color: white;
   border: none;
-  border-radius: 5px;
-  font-size: 16px;
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   filter: invert(1);
