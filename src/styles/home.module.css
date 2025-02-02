@@ -17,11 +17,6 @@
   transition: background-color 0.3s ease;
 }
 
-.video {
-  transform: scaleX(-1);
-}
-
-
 /* Title styling */
 .title {
   font-size: 2.5rem;
