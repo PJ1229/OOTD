@@ -81,6 +81,7 @@ export default function UploadPage() {
       // Set canvas dimensions to match the video feed
       canvas.width = video.videoWidth;
       canvas.height = video.videoHeight;
+      
 
       // Draw the current frame from the video onto the canvas
       context?.drawImage(video, 0, 0, canvas.width, canvas.height);
@@ -231,10 +232,7 @@ export default function UploadPage() {
 
           {/* Buttons inside the camera feed */}
           <div className={styles.buttonContainer}>
-            <button onClick={capturePicture} className={styles.captureButton}>
-              Capture
-            </button>
-            <label htmlFor="uploadInput" className={styles.uploadLabel}>
+          <label htmlFor="uploadInput" className={styles.uploadLabel}>
               Upload Image
             </label>
             <input
@@ -244,6 +242,12 @@ export default function UploadPage() {
               onChange={handleImageUpload}
               className={styles.uploadInput}
             />
+          <button onClick={capturePicture} className={styles.captureButton}>
+            Capture Image
+          </button>
+            <button onClick={resetPage} className={styles.resetButton}>
+              Saved Outfits
+            </button>
           </div>
         </div>
       )}
