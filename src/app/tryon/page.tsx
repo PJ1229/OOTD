@@ -244,7 +244,7 @@ export default function UploadPage() {
               className={styles.uploadInput}
             />
           <button onClick={capturePicture} className={styles.captureButton}>
-            Capture Image
+            <Image src="/circle.svg" alt="Capture" width={1000} height={1000} />
           </button>
             <button onClick={resetPage} className={styles.resetButton}>
               Saved Outfits
