@@ -10,8 +10,9 @@ import Navbar from "@/components/Navbar";
 
 // Outfit type
 interface Outfit {
-  name: string;
+  handle: string;
   image: string;
+  points: { [key: string]: [number, number] };
 }
 
 // Props for SwipeableCard
@@ -21,9 +22,21 @@ interface SwipeableCardProps {
 }
 
 const outfits: Outfit[] = [
-  { name: 'Casual Chic', image: 'https://source.unsplash.com/400x600/?casual,style' },
-  { name: 'Formal Elegance', image: 'https://source.unsplash.com/400x600/?formal,wear' },
-  { name: 'Sporty Look', image: 'https://source.unsplash.com/400x600/?sporty' },
+  { 
+    handle: 'chillguy', 
+    image: '/images/image1.jpeg',
+    points: { "xyz": [10, 30], "abc": [20, 40] } 
+  },
+  { 
+    handle: 'fancyguy23', 
+    image: '/images/image2.jpg',
+    points: { "def": [15, 25], "ghi": [35, 45] } 
+  },
+  { 
+    handle: 'lebron', 
+    image: '/images/image3.jpg',
+    points: { "jkl": [5, 10], "mno": [50, 60] } 
+  },
 ];
 
 const SWIPE_THRESHOLD = 100;
@@ -75,10 +88,10 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
   const finishSwipe = () => {
     if (position.x > SWIPE_THRESHOLD) {
       setPosition({ x: 500, y: position.y });
-      onSwipe('right', outfit.name);
+      onSwipe('right', outfit.handle);
     } else if (position.x < -SWIPE_THRESHOLD) {
       setPosition({ x: -500, y: position.y });
-      onSwipe('left', outfit.name);
+      onSwipe('left', outfit.handle);
     } else {
       setPosition({ x: 0, y: 0 });
     }
@@ -104,8 +117,18 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
       onTouchEnd={handleTouchEnd}
     >
       <div className={styles.cardLabel}>
-        <h3>{outfit.name}</h3>
+        <h3>{outfit.handle}</h3>
       </div>
+      {Object.values(outfit.points).map((point, index) => (
+        <div
+          key={index}
+          className={styles.circle}
+          style={{
+            left: `${point[0]}px`,
+            top: `${point[1]}px`,
+          }}
+        />
+      ))}
     </div>
   );
 };
@@ -138,7 +161,7 @@ export default function Home() {
 
       <div className={styles.cardContainer}>
         {outfits.slice(currentIndex).map((outfit) => (
-          <SwipeableCard key={outfit.name} outfit={outfit} onSwipe={handleSwipe} />
+          <SwipeableCard key={outfit.handle} outfit={outfit} onSwipe={handleSwipe} />
         ))}
       </div>
 
