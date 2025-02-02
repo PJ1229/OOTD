@@ -205,17 +205,6 @@ export default function UploadPage() {
     }
   };
 
-  // Reset the page to its original state
-  const resetPage = () => {
-    setCapturedImage(null);
-    setGarmentImage(null);
-    setUpdatedImage(null);
-    setShowVideo(true);
-    setShowUploadGarment(false);
-    setTaskId(null);
-    startCamera(); // Restart the camera
-  };
-
   // Start the camera when the component mounts
   useEffect(() => {
     startCamera();
@@ -292,6 +281,14 @@ export default function UploadPage() {
         </div>
       )}
 
+      {/* Display Updated Image */}
+      {updatedImage && !isLoading && (
+        <div className={styles.imageContainer}>
+          <h2>Updated Image</h2>
+          <img src={updatedImage} alt="Updated" className={styles.updatedImage} />
+        </div>
+      )}
+      
       <Navbar />
     </div>
   );
