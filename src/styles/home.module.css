@@ -193,3 +193,86 @@
   color: gold;
   margin-right: 0.5rem;
 }
+.container {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 70px; /* Space for the Navbar */
+  text-align: center;
+  background-color: #f7f7f7;
+  font-family: Arial, sans-serif;
+}
+
+.logo {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 10; /* Make sure it stays on top */
+}
+
+/* Swipe Arrows */
+.swipeArrows {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  margin: 100px 0 20px; /* Space from the logo */
+}
+
+.arrow {
+  font-size: 2rem;
+  color: #333;
+  animation: bounce 1.5s infinite alternate;
+}
+
+/* Add bounce animation for arrows */
+@keyframes bounce {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-10px);
+  }
+}
+
+.swipeText {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #555;
+}
+
+.cardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.card {
+  width: 300px;
+  height: 400px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  transition: transform 0.3s ease-out;
+}
+
+.cardLabel {
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  border-bottom-left-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+.direction {
+  margin: 20px 0;
+  font-size: 1.5rem;
+  color: #555;
+}
