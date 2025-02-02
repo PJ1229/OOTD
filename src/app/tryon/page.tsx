@@ -18,8 +18,8 @@ export default function UploadPage() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   // TODO: MAKE SECRET AND REPLACE WITH API KEY
-  const APIKEY = "XXXXXXXXX"
-  // Access the camera and start the video stream
+  const APIKEY = "fa-D6ATurJQTwXP-xeUn6ecPlbDmmgRDS9ILpnmq"
+  // Access the camera and start the video stream 
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
