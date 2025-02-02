@@ -9,7 +9,7 @@ import Navbar from "@/components/Navbar";
 
 // Outfit type
 interface Outfit {
-  name: string;
+  handle: string;
   image: string;
 }
 
@@ -20,9 +20,9 @@ interface SwipeableCardProps {
 }
 
 const outfits: Outfit[] = [
-  { name: 'Casual Chic', image: 'https://source.unsplash.com/400x600/?casual,style' },
-  { name: 'Formal Elegance', image: 'https://source.unsplash.com/400x600/?formal,wear' },
-  { name: 'Sporty Look', image: 'https://source.unsplash.com/400x600/?sporty' },
+  { handle: 'user1', image: 'https://source.unsplash.com/random/400x600/?casual,style' },
+  { handle: 'user2', image: 'https://source.unsplash.com/random/400x600/?formal,wear' },
+  { handle: 'user3', image: 'https://source.unsplash.com/random/400x600/?sporty' },
 ];
 
 const SWIPE_THRESHOLD = 100;
@@ -74,10 +74,10 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
   const finishSwipe = () => {
     if (position.x > SWIPE_THRESHOLD) {
       setPosition({ x: 500, y: position.y });
-      onSwipe('right', outfit.name);
+      onSwipe('right', outfit.handle);
     } else if (position.x < -SWIPE_THRESHOLD) {
       setPosition({ x: -500, y: position.y });
-      onSwipe('left', outfit.name);
+      onSwipe('left', outfit.handle);
     } else {
       setPosition({ x: 0, y: 0 });
     }
@@ -103,7 +103,7 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
       onTouchEnd={handleTouchEnd}
     >
       <div className={styles.cardLabel}>
-        <h3>{outfit.name}</h3>
+        <h3>{outfit.handle}</h3>
       </div>
     </div>
   );
@@ -126,7 +126,7 @@ export default function Home() {
       <h1 className={styles.title}>Rate Outfits</h1>
       <div className={styles.cardContainer}>
         {outfits.slice(currentIndex).map((outfit) => (
-          <SwipeableCard key={outfit.name} outfit={outfit} onSwipe={handleSwipe} />
+          <SwipeableCard key={outfit.handle} outfit={outfit} onSwipe={handleSwipe} />
         ))}
       </div>
       {lastDirection && <h2 className={styles.direction}>You swiped {lastDirection}</h2>}
