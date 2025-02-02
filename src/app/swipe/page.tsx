@@ -19,16 +19,16 @@ interface SwipeableCardProps {
 
 const outfits: Outfit[] = [
   {
-    name: 'Casual Chic',
-    image: 'https://source.unsplash.com/400x600/?casual,style',
+    name: 'Outfit 1',
+    image: '/images/image1.jpeg'
   },
   {
-    name: 'Formal Elegance',
-    image: 'https://source.unsplash.com/400x600/?formal,wear',
+    name: 'Outfit 2',
+    image: '/images/image2.jpg'
   },
   {
-    name: 'Sporty Look',
-    image: 'https://source.unsplash.com/400x600/?sporty',
+    name: 'Outfit 3',
+    image: '/images/image3.jpg'
   },
 ];
 
@@ -112,8 +112,17 @@ const SwipeableCard: React.FC<SwipeableCardProps> = ({ outfit, onSwipe }) => {
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
     >
-      <div className={styles.cardLabel}>
-        <h3>{outfit.name}</h3>
+    
+    <div className={styles.cardContent}>
+        <div className={styles.cardHeader}>
+          <span className={styles.userHandle}>fakehandlehere</span>
+          </div>
+        <div className={styles.cardLabel}>
+          <div className={styles.outfitDetails}>
+            <p>Fur Coat</p>
+            <p>Leather Boots</p>
+          </div>
+        </div>
       </div>
     </div>
   );
