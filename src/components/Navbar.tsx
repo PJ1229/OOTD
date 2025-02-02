@@ -5,7 +5,7 @@ import styles from "./Navbar.module.css"; // Adjust the path if your CSS module 
 export default function Navbar() {
   return (
     <nav className={styles.bottomNav}>
-      <Link href="/profile" className={styles.iconLink}>
+      <Link href="/leaderboard" className={styles.iconLink}>
         <FaTrophy className={styles.icon} />
       </Link>
       <Link href="/swipe" className={styles.iconLink}>
