@@ -1,9 +1,9 @@
 // app/upload/page.tsx
 'use client';
+import 'dotenv/config';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styles from '../../styles/home.module.css';
-import { start } from 'repl';
 
 export default function UploadPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -12,9 +12,12 @@ export default function UploadPage() {
   const [updatedImage, setUpdatedImage] = useState<string | null>(null);
   const [showVideo, setShowVideo] = useState(true); // Control visibility of the video feed
   const [showUploadGarment, setShowUploadGarment] = useState(false); // Control visibility of the garment upload button
+  const [taskId, setTaskId] = useState<string | null>(null); // Store the task_id from the API
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
+  // TODO: MAKE SECRET AND REPLACE WITH API KEY
+  const APIKEY = "XXXXXXXXX"
   // Access the camera and start the video stream
   const startCamera = async () => {
     try {
@@ -70,21 +73,81 @@ export default function UploadPage() {
       const reader = new FileReader();
       reader.onload = (e) => {
         setGarmentImage(e.target?.result as string);
-        simulateApiCall(); // Simulate the API call after garment is uploaded
+        sendImagesToApi(capturedImage, e.target?.result as string); // Send both images to the API
       };
       reader.readAsDataURL(file);
     }
   };
 
-  // Simulate an API call
-  const simulateApiCall = () => {
+  // Send images to the API
+  const sendImagesToApi = async (modelImage: string | null, garmentImage: string | null) => {
+    if (!modelImage || !garmentImage) return;
+
     setIsLoading(true);
-    setTimeout(() => {
-      // Simulate an updated image (e.g., after applying a filter or processing)
-      setUpdatedImage(capturedImage); // In a real app, this would combine the captured image and garment
-      setIsLoading(false);
-      setShowUploadGarment(false); // Hide the garment upload button
-    }, 2000); // Simulate a 2-second delay
+
+    try {
+      // Step 1: Upload images to the API
+      const response = await fetch('https://api.fashn.ai/v1/run', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${APIKEY}`, // Replace with your actual API key
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          model_image: modelImage, // Captured/uploaded image
+          garment_image: garmentImage, // Garment image
+          category: 'tops', // Replace with the appropriate category
+          restore_background: true, 
+          restore_clothes: true, 
+        }),
+      });
+
+      if (response.ok) {
+        const { id } = await response.json();
+        setTaskId(id); // Save the task_id
+        pollForResult(id); // Start polling for the result
+      } else {
+        console.error('Failed to upload images');
+      }
+    } catch (error) {
+      console.error('Error uploading images:', error);
+    }
+  };
+
+  // Poll the API for the result
+  const pollForResult = async (taskId: string) => {
+    try {
+      let result = null;
+      while (!result) {
+        const response = await fetch(`https://api.fashn.ai/v1/status/${taskId}`, {
+          headers: {
+            'Authorization': `Bearer ${APIKEY}`, // Replace with your actual API key
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.status === 'completed') {
+            result = data.output[0]; // Assuming the API returns the processed image URL
+            setUpdatedImage(result);
+            setIsLoading(false);
+            setShowUploadGarment(false); // Hide the garment upload button
+            break;
+          } else if (data.status === 'failed') {
+            console.error('Image processing failed');
+            break;
+          }
+        } else {
+          console.error('Failed to fetch result');
+          break;
+        }
+
+        // Wait for 2 seconds before polling again
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+      }
+    } catch (error) {
+      console.error('Error polling for result:', error);
+    }
   };
 
   // Reset the page to its original state
@@ -94,11 +157,12 @@ export default function UploadPage() {
     setUpdatedImage(null);
     setShowVideo(true);
     setShowUploadGarment(false);
-    startCamera();
+    setTaskId(null);
+    startCamera(); // Restart the camera
   };
 
   // Start the camera when the component mounts
-  React.useEffect(() => {
+  useEffect(() => {
     startCamera();
   }, []);
 
