@@ -61,14 +61,6 @@ export default function Leaderboard() {
         ))}
       </div>
 
-      {/* Bottom Navigation Bar */}
-      <nav className="fixed bottom-0 left-0 right-0 bg-white shadow-md flex justify-around items-center p-4">
-        <Link href="/leaderboard" className="text-black font-medium hover:text-blue-500">Leaderboard</Link>
-        <Link href="/" className="text-black font-medium hover:text-blue-500">Home</Link>
-        <Link href="/add" className="text-black font-medium hover:text-blue-500">Add Outfit</Link>
-        <Link href="/market" className="text-black font-medium hover:text-blue-500">Shop</Link>
-        <Link href="/camera" className="text-black font-medium hover:text-blue-500">Camera</Link>
-      </nav>
       <Navbar />
     </div>
   );

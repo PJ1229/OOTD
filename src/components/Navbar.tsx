@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FaTrophy, FaHome, FaPlusSquare, FaStore, FaCamera } from "react-icons/fa";
+import { FaTrophy, FaHome, FaPlusSquare, FaStore, FaTshirt } from "react-icons/fa";
 import styles from "./Navbar.module.css"; // Adjust the path if your CSS module is elsewhere
 
 export default function Navbar() {
@@ -8,17 +8,24 @@ export default function Navbar() {
       <Link href="/leaderboard" className={styles.iconLink}>
         <FaTrophy className={styles.icon} />
       </Link>
+      <Link href="/tryon" className={styles.iconLink}>
+        <FaPlusSquare className={styles.icon} />
+      </Link>
       <Link href="/swipe" className={styles.iconLink}>
         <FaHome className={styles.icon} />
       </Link>
+<<<<<<< HEAD
       <Link href="/add" className={styles.iconLink}>
         <FaPlusSquare className={styles.icon} />
       </Link>
       <Link href="/shop" className={styles.iconLink}>
+=======
+      <Link href="/market" className={styles.iconLink}>
+>>>>>>> main
         <FaStore className={styles.icon} />
       </Link>
-      <Link href="/camera" className={styles.iconLink}>
-        <FaCamera className={styles.icon} />
+      <Link href="/favorites" className={styles.iconLink}>
+        <FaTshirt className={styles.icon} />
       </Link>
     </nav>
   );

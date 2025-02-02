@@ -92,6 +92,37 @@
   transform: scale(1.1);
 }
 
+<<<<<<< HEAD
+=======
+/* Adjust container to prevent content overlap with navbar */
+.container {
+  padding-bottom: 60px; /* Add bottom padding equal to navbar height */
+}
+
+/* Ensure the container takes full viewport height and leaves space for the nav */
+.navContainer {
+  position: relative;
+  min-height: 100vh;
+  padding-bottom: 60px; /* Adjust based on your nav bar height */
+}
+
+/* Navigation bar fixed to the bottom */
+.bottomNav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;             /* Set the desired height */
+  background-color: #fff;   /* White background */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);  /* Optional: adds a subtle shadow */
+  z-index: 100;             /* Ensure it appears above other content */
+}
+
+/* Optional: additional styling for the icon if necessary */
+>>>>>>> main
 .icon {
   vertical-align: middle;
   font-size: 24px;

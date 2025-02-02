@@ -4,6 +4,7 @@ import 'dotenv/config';
 
 import React, { useState, useRef, useEffect } from 'react';
 import styles from '../../styles/home.module.css';
+import Navbar from "@/components/Navbar";
 
 export default function UploadPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -17,8 +18,8 @@ export default function UploadPage() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   // TODO: MAKE SECRET AND REPLACE WITH API KEY
-  const APIKEY = "XXXXXXXXX"
-  // Access the camera and start the video stream
+  const APIKEY = "fa-D6ATurJQTwXP-xeUn6ecPlbDmmgRDS9ILpnmq"
+  // Access the camera and start the video stream 
   const startCamera = async () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ video: true });
@@ -251,6 +252,7 @@ export default function UploadPage() {
           Try Another Fit
         </button>
       )}
+      <Navbar />
     </div>
   );
 }
