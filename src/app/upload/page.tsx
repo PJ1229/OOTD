@@ -6,6 +6,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import styles from '../../styles/home.module.css';
 import Navbar from "@/components/Navbar";
 import { useSearchParams } from 'next/navigation';
+import Image from 'next/image';
 
 export default function UploadPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -233,7 +234,7 @@ export default function UploadPage() {
           {/* Buttons inside the camera feed */}
           <div className={styles.buttonContainer}>
           <button onClick={capturePicture} className={styles.captureButton}>
-            Capture Image
+            <Image src="/circle.svg" alt="Capture" width={1000} height={1000} />
           </button>
           </div>
         </div>
