@@ -301,25 +301,31 @@
 
 .buttonContainer {
   position: absolute;
-  bottom: 0vh;
+  bottom: 5vh; /* Adjusted for better visibility */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
-  gap: 10px;
-  width: 100%;
+  align-items: center; /* Ensures vertical alignment */
+  justify-content: center; /* Centers horizontally */
+  gap: 20px; /* Adjust spacing */
+  width: auto;
 }
 
+
 .captureButton {
-  padding: 20px 20px;
+  padding: 15px; /* Slightly reduced padding */
   background-color: transparent;
   color: white;
   border: none;
   border-radius: 50%;
-  width: 150px;
-  height: 150px;
+  width: 120px; /* Adjusted for uniform size */
+  height: 120px;
   cursor: pointer;
   transition: background-color 0.3s ease;
   filter: invert(1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .resetButton {
@@ -334,7 +340,7 @@
 }
 
 .uploadLabel {
-  padding: 20px 20px;
+  padding: 12px 15px; /* Adjust padding for consistency */
   background-color: transparent;
   color: white;
   border-radius: 5px;
@@ -342,6 +348,9 @@
   cursor: pointer;
   transition: background-color 0.3s ease;
   filter: invert(1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .uploadInput {
