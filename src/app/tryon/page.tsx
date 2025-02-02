@@ -5,11 +5,13 @@ import 'dotenv/config';
 import React, { useState, useRef, useEffect } from 'react';
 import styles from '../../styles/home.module.css';
 import Navbar from "@/components/Navbar";
+import { useSearchParams } from 'next/navigation';
 
 export default function UploadPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [capturedImage, setCapturedImage] = useState<string | null>(null);
   const [garmentImage, setGarmentImage] = useState<string | null>(null); // For garment upload
+  const [garmentImageURL, setGarmentImageURL] = useState<string | null>(null); // For garment upload
   const [updatedImage, setUpdatedImage] = useState<string | null>(null);
   const [showVideo, setShowVideo] = useState(true); // Control visibility of the video feed
   const [showUploadGarment, setShowUploadGarment] = useState(false); // Control visibility of the garment upload button
@@ -19,6 +21,44 @@ export default function UploadPage() {
 
   // TODO: MAKE SECRET AND REPLACE WITH API KEY
   const APIKEY = "fa-D6ATurJQTwXP-xeUn6ecPlbDmmgRDS9ILpnmq"
+
+  const searchParams = useSearchParams();
+  const garmentFromLibrary = searchParams.get('garment');
+
+  const convertFileToBase64 = (filePath: string): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      // Fetch the file from the local path
+      fetch(filePath)
+        .then((response) => response.blob())
+        .then((blob) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            resolve(reader.result as string); // Resolve with the Base64 URI
+          };
+          reader.onerror = () => {
+            reject(new Error('Failed to read file'));
+          };
+          reader.readAsDataURL(blob); // Convert the file to a Base64 URI
+        })
+        .catch((error) => {
+          reject(error);
+        });
+    });
+  };
+
+  // Pre-select the garment if it's provided in the query parameter
+  useEffect(() => {
+    if (garmentFromLibrary) {
+      convertFileToBase64(garmentFromLibrary)
+        .then((base64) => {
+          setGarmentImage(garmentFromLibrary);
+          setGarmentImageURL(base64);
+          setShowUploadGarment(false); // Show the garment upload button
+        })
+        .catch((error) => console.error('Error converting file to Base64:', error));
+    }
+  }, [garmentFromLibrary]);
+  
   // Access the camera and start the video stream 
   const startCamera = async () => {
     try {
@@ -49,19 +89,31 @@ export default function UploadPage() {
       const imageDataUrl = canvas.toDataURL('image/png');
       setCapturedImage(imageDataUrl);
       setShowVideo(false); // Hide the video feed after capturing
-      setShowUploadGarment(true); // Show the garment upload button
+      
+      if(garmentImage) {
+        sendImagesToApi(imageDataUrl, garmentImageURL); // Send both images to the API
+      } else {
+        setShowUploadGarment(true); // Show the garment upload button
+      }
     }
   };
 
   // Handle image upload
   const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  
     const file = event.target.files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e) => {
-        setCapturedImage(e.target?.result as string);
+        const imageDataUrl = e.target?.result as string;
+        setCapturedImage(imageDataUrl);
         setShowVideo(false); // Hide the video feed if it's visible
-        setShowUploadGarment(true); // Show the garment upload button
+      
+        if(garmentImage) {
+          sendImagesToApi(imageDataUrl, garmentImageURL); // Send both images to the API
+        } else {
+          setShowUploadGarment(true); // Show the garment upload button
+        }
       };
       reader.readAsDataURL(file);
     }
