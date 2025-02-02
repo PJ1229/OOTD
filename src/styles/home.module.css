@@ -150,3 +150,46 @@
 .icon {
   vertical-align: middle;
 }
+
+/* Container to center everything vertically and horizontally */
+.leaderboardContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: #f9f9f9; /* Light background color */
+  padding: 1rem;
+}
+
+/* Leaderboard list container */
+.leaderboardList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Individual leaderboard item */
+.leaderboardItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+/* Remove the border from the last item */
+.leaderboardItem:last-child {
+  border-bottom: none;
+}
+
+/* Rank, Name, and Score sections */
+.rank, .name, .score {
+  flex: 1;
+}
+
+/* Trophy icon styling */
+.trophyIcon {
+  color: gold;
+  margin-right: 0.5rem;
+}
