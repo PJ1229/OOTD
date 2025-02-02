@@ -6,8 +6,6 @@ import React, { useState, useRef, useEffect } from 'react';
 import styles from '../../styles/home.module.css';
 import Navbar from "@/components/Navbar";
 import { useSearchParams } from 'next/navigation';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCamera } from '@fortawesome/free-solid-svg-icons';
 
 export default function UploadPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -234,22 +232,9 @@ export default function UploadPage() {
 
           {/* Buttons inside the camera feed */}
           <div className={styles.buttonContainer}>
-          <label htmlFor="uploadInput" className={styles.uploadLabel}>
-              Upload Image
-            </label>
-            <input
-              id="uploadInput"
-              type="file"
-              accept="image/*"
-              onChange={handleImageUpload}
-              className={styles.uploadInput}
-            />
           <button onClick={capturePicture} className={styles.captureButton}>
-            <FontAwesomeIcon icon={faCamera} />
+            Capture Image
           </button>
-            <button onClick={resetPage} className={styles.resetButton}>
-              Saved Outfits
-            </button>
           </div>
         </div>
       )}
