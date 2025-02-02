@@ -109,12 +109,10 @@ export default function Leaderboard() {
 
   return (
     <div className="min-h-screen bg-white pb-20">
-      {/* Logo */}
       <div className="flex justify-center mt-4">
-        <Image src="/ootd.svg" alt="OOTD" width={200} height={100} />
+        <Image src="/ootd.png" alt="OOTD" width={200} height={100} />
       </div>
 
-      {/* Leaderboard */}
       <div className="mt-4">
         {posts.map((post, index) => (
           <LeaderboardCard

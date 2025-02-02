@@ -196,8 +196,10 @@ export default function Home() {
   };
 
   return (
-    <div className={`${styles.container} ${flashColor ? styles[flashColor] : ""}`}>
-      <Image src="/ootd.svg" alt="OOTD Logo" width={150} height={80} />
+    <div
+      className={`${styles.container} ${flashColor ? styles[flashColor] : ""}`}
+    >
+      <Image src="/ootd.png" alt="OOTD Logo" width={150} height={80} />
       <div className={styles.cardContainer}>
         {posts[currentIndex] ? (
           <SwipeableCard
