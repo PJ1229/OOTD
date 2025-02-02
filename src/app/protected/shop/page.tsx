@@ -3,8 +3,9 @@
 import React from "react";
 import Image from "next/image";
 import { FaShoppingCart, FaSearch } from "react-icons/fa";
-import styles from "@/styles/shop.module.css";
 import Navbar from "@/components/Navbar";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 const products = [
   { name: "Stussy", price: "$120.99", image: "/stussy-sweater.png" }, // Replace with actual product images
@@ -15,61 +16,62 @@ const products = [
 
 export default function Shop() {
   return (
-    <div className={styles.container}>
-      {/* Header */}
-      <header className={styles.header}>
-        <Image src="/ootd.png" alt="OOTD" width={200} height={100} />
-        <div className={styles.cartIcon}>
+    <div className="px-3.5 pt-5 relative">
+      <header className="flex justify-between items-center">
+        <Image src="/ootd-shop.png" alt="OOTD" width={200} height={100} />
+        <div className="relative">
           <FaShoppingCart size={24} />
-          <span className={styles.cartBadge}>1</span>
         </div>
       </header>
 
-      {/* Search Bar */}
-      <div className={styles.searchBar}>
-        <input type="text" placeholder="What are you looking for?" />
-        <FaSearch className={styles.searchIcon} />
+      <div className="flex justify-center w-full my-5">
+        <div className="relative w-4/5 z-[-1]">
+          <Input
+            placeholder="What are you looking for?"
+            className="p-5 bg-gray-200 text-black placeholder:text-black rounded-full"
+          />
+          <FaSearch className="absolute top-1/2 right-2 -translate-y-1/2" />
+        </div>
       </div>
 
-      {/* Upper Wear Section */}
-      <section className={styles.section}>
-        <h2>Upper Wear</h2>
-        <div className={styles.productGrid}>
+      <section>
+        <h2 className="text-xl font-bold">Upper Wear</h2>
+        <div className="grid grid-cols-2 gap-4">
           {products.map((product, index) => (
-            <div key={index} className={styles.productCard}>
+            <div key={index} className="flex flex-col items-center p-4">
               <Image
-                src={product.image}
+                src="/stussy.png"
                 alt={product.name}
-                width={120}
-                height={120}
+                width={220}
+                height={220}
               />
-              <p>{product.name}</p>
-              <p className={styles.price}>{product.price}</p>
+              <form>
+                <Button>Try On</Button>
+              </form>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Lower Wear Section */}
-      <section className={styles.section}>
-        <h2>Lower Wear</h2>
-        <div className={styles.productGrid}>
+      <section>
+        <h2 className="text-xl font-bold">Lower Wear</h2>
+        <div className="grid grid-cols-2 gap-4">
           {products.map((product, index) => (
-            <div key={index} className={styles.productCard}>
+            <div key={index} className="flex flex-col items-center p-4">
               <Image
-                src={product.image}
+                src="/stussy.png"
                 alt={product.name}
-                width={120}
-                height={120}
+                width={220}
+                height={220}
               />
-              <p>{product.name}</p>
-              <p className={styles.price}>{product.price}</p>
+              <form>
+                <Button>Try On</Button>
+              </form>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Bottom Navigation */}
       <Navbar />
     </div>
   );
