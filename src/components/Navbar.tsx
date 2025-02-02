@@ -17,7 +17,7 @@ export default function Navbar() {
       <Link href="/protected/shop" className={styles.iconLink}>
         <FaStore className={styles.icon} />
       </Link>
-      <Link href="/protected/favorites" className={styles.iconLink}>
+      <Link href="/protected/library" className={styles.iconLink}>
         <FaTshirt className={styles.icon} />
       </Link>
     </nav>
