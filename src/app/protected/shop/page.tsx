@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaShoppingCart, FaSearch, FaTrophy, FaHome, FaPlusSquare, FaStore, FaUser } from 'react-icons/fa';
-import styles from '../../styles/shop.module.css';
+import styles from '@/styles/shop.module.css';
 import Navbar from "@/components/Navbar";
 
 const products = [

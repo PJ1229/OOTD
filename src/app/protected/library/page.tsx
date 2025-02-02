@@ -6,7 +6,7 @@ import Link from "next/link";
 import styles from "@/styles/library.module.css";
 
 // Import the JSON file (replace with your actual path)
-import garments from "../../../data/favorites.json";
+import garments from "@/data/favorites.json";
 
 export default function LibraryPage() {
   return (
