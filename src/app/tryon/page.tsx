@@ -20,7 +20,7 @@ export default function UploadPage() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   // TODO: MAKE SECRET AND REPLACE WITH API KEY
-  const APIKEY = "fa-D6ATurJQTwXP-xeUn6ecPlbDmmgRDS9ILpnmq"
+  const APIKEY = process.env.NEXT_PUBLIC_APIKEY;
 
   const searchParams = useSearchParams();
   const garmentFromLibrary = searchParams.get('garment');
