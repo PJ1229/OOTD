@@ -78,6 +78,8 @@
   margin: 5px 0;
 }
 
+/* try on page styling */
+
 .videoContainer {
   position: relative;
   margin-bottom: 20px;
@@ -132,8 +134,15 @@
   display: none; /* Hide the default file input */
 }
 
-.imageContainer {
+.imageRow {
+  display: flex;
+  justify-content: center;
+  gap: 20px; /* Space between images */
   margin-top: 20px;
+}
+
+.imageContainer {
+  text-align: center;
 }
 
 .originalImage {

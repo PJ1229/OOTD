@@ -3,6 +3,7 @@
 
 import React, { useState, useRef } from 'react';
 import styles from '../../styles/home.module.css';
+import { start } from 'repl';
 
 export default function UploadPage() {
   const [isLoading, setIsLoading] = useState(false);
@@ -130,11 +131,21 @@ export default function UploadPage() {
         </div>
       )}
 
-      {/* Display Captured/Uploaded Image */}
-      {capturedImage && !updatedImage && (
-        <div className={styles.imageContainer}>
-          <h2>{showVideo ? 'Captured Image' : 'Uploaded Image'}</h2>
-          <img src={capturedImage} alt="Captured/Uploaded" className={styles.originalImage} />
+      {/* Display Captured/Uploaded Image and Garment Image */}
+      {(capturedImage || garmentImage) && !updatedImage && (
+        <div className={styles.imageRow}>
+          {capturedImage && (
+            <div className={styles.imageContainer}>
+              <h2>{showVideo ? 'Captured Image' : 'Uploaded Image'}</h2>
+              <img src={capturedImage} alt="Captured/Uploaded" className={styles.originalImage} />
+            </div>
+          )}
+          {garmentImage && (
+            <div className={styles.imageContainer}>
+              <h2>Garment Image</h2>
+              <img src={garmentImage} alt="Garment" className={styles.originalImage} />
+            </div>
+          )}
         </div>
       )}
 
