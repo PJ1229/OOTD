@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import styles from "@/styles/home.module.css";
 import Navbar from "@/components/Navbar";
+import { createClient } from "@/utils/supabase/client";
 
 // Outfit type
 interface Outfit {
@@ -18,24 +18,6 @@ interface SwipeableCardProps {
   outfit: Outfit;
   onSwipe: (direction: "left" | "right", outfitName: string) => void;
 }
-
-const outfits: Outfit[] = [
-  { 
-    handle: 'chillguy', 
-    image: '/images/image1.jpeg',
-    points: { "xyz": [10, 30], "abc": [20, 40] } 
-  },
-  { 
-    handle: 'fancyguy23', 
-    image: '/images/image2.jpg',
-    points: { "def": [15, 25], "ghi": [35, 45] } 
-  },
-  { 
-    handle: 'lebron', 
-    image: '/images/image3.jpg',
-    points: { "jkl": [5, 10], "mno": [50, 60] } 
-  },
-];
 
 const SWIPE_THRESHOLD = 100;
 
@@ -128,48 +110,98 @@ export default function Home() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [lastDirection, setLastDirection] = useState<string | null>(null);
   const [flashColor, setFlashColor] = useState<string | null>(null);
+  const [posts, setPosts] = useState([]);
 
-  const handleSwipe = (direction: "left" | "right", outfitName: string) => {
+  useEffect(() => {
+    const supabase = createClient();
+
+    const channel = supabase
+      .channel("posts_changes")
+      .on(
+        "postgres_changes",
+        { event: "*", schema: "public", table: "posts" },
+        (payload) => {
+          if (payload.eventType === "INSERT") {
+            setPosts((prev) => [...prev, payload.new]);
+          } else if (payload.eventType === "UPDATE") {
+            setPosts((prev) =>
+              prev.map((post) =>
+                post.id === payload.new.id ? payload.new : post
+              )
+            );
+          } else if (payload.eventType === "DELETE") {
+            setPosts((prev) =>
+              prev.filter((post) => post.id !== payload.old.id)
+            );
+          }
+        }
+      )
+      .subscribe();
+
+    const fetchPosts = async () => {
+      const { data, error } = await supabase.from("posts").select("*");
+      if (data) {
+        setPosts(data);
+      }
+      if (error) console.error("Error fetching posts:", error);
+    };
+    fetchPosts();
+
+    return () => {
+      supabase.removeChannel(channel);
+    };
+  });
+
+  const handleSwipe = async (
+    direction: "left" | "right",
+    outfitName: string
+  ) => {
+    const supabase = createClient();
+
     setLastDirection(direction);
     console.log(`Swiped ${direction} on ${outfitName}`);
+    const currentPost = posts[currentIndex];
 
     if (direction === "left") {
+      console.log(currentPost);
+      const { data, error } = await supabase
+        .from("posts")
+        .update({ dislikes: (currentPost.dislikes || 0) + 1 })
+        .eq("id", currentPost.id);
+
+      if (error) console.error("Error updating dislikes:", error);
       setFlashColor("red");
     } else if (direction === "right") {
+      console.log(currentPost);
+      const { data, error } = await supabase
+        .from("posts")
+        .update({ likes: (currentPost.likes || 0) + 1 })
+        .eq("id", currentPost.id);
       setFlashColor("green");
     }
 
     setTimeout(() => {
       setCurrentIndex((prev) => prev + 1);
-      setFlashColor(null)
+      setFlashColor(null);
     }, 300);
   };
 
   return (
-    <div className={`${styles.container} ${flashColor ? styles[flashColor] : ''}`}>
-      <div className={styles.logo}>
-        <Image src="/ootd.svg" alt="OOTD Logo" width={150} height={80} />
-      </div>
-
-      <div className={styles.swipeArrows}>
-        <FaArrowLeft className={styles.arrow} />
-        <span className={styles.swipeText}>Swipe</span>
-        <FaArrowRight className={styles.arrow} />
-      </div>
-
+    <div
+      className={`${styles.container} ${flashColor ? styles[flashColor] : ""}`}
+    >
+      <Image src="/ootd.svg" alt="OOTD Logo" width={150} height={80} />
       <div className={styles.cardContainer}>
-        {outfits.slice(currentIndex).map((outfit) => (
+        {posts.map((post, index) => (
           <SwipeableCard
-            key={outfit.handle}
-            outfit={outfit}
+            key={index}
+            outfit={{
+              image: post.image,
+            }}
             onSwipe={handleSwipe}
           />
         ))}
       </div>
-
-      {lastDirection && (
-        <h2 className={styles.direction}>You swiped {lastDirection}</h2>
-      )}
 
       <Navbar />
     </div>
