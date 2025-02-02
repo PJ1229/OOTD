@@ -244,7 +244,7 @@ export default function UploadPage() {
               className={styles.uploadInput}
             />
           <button onClick={capturePicture} className={styles.captureButton}>
-            <Image src="/circle.svg" alt="Capture" width={1000} height={1000} />
+            <Image src="/circle.svg" alt="Capture" width={100} height={100} />
           </button>
             
           </div>
