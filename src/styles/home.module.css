@@ -301,7 +301,7 @@
 
 .buttonContainer {
   position: absolute;
-  bottom: -40vh;
+  bottom: 0vh;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -311,7 +311,7 @@
 
 .captureButton {
   padding: 20px 20px;
-  background-color: purple;
+  background-color: transparent;
   color: white;
   border: none;
   border-radius: 50%;
@@ -335,7 +335,7 @@
 
 .uploadLabel {
   padding: 20px 20px;
-  background-color: black;
+  background-color: transparent;
   color: white;
   border-radius: 5px;
   font-size: 16px;
