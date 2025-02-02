@@ -5,6 +5,7 @@ import Link from 'next/link';
 import styles from '../../styles/home.module.css';
 import { FaTrophy, FaHome, FaPlusSquare, FaStore, FaCamera } from 'react-icons/fa'; // Importing icons
 import '../../../globals.css';
+import Navbar from "@/components/Navbar";
 
 // Outfit type
 interface Outfit {
@@ -131,23 +132,7 @@ export default function Home() {
       {lastDirection && <h2 className={styles.direction}>You swiped {lastDirection}</h2>}
 
       {/* Bottom Navigation Bar */}
-      <nav className={styles.bottomNav}>
-        <Link href="/profile" className={styles.iconLink}>
-          <FaTrophy className={styles.icon} />
-        </Link>
-        <Link href="/" className={styles.iconLink}>
-          <FaHome className={styles.icon} />
-        </Link>
-        <Link href="/add" className={styles.iconLink}>
-          <FaPlusSquare className={styles.icon} />
-        </Link>
-        <Link href="/market" className={styles.iconLink}>
-          <FaStore className={styles.icon} />
-        </Link>
-        <Link href="/camera" className={styles.iconLink}>
-          <FaCamera className={styles.icon} />
-        </Link>
-      </nav>
+      <Navbar />
     </div>
   );
 }
