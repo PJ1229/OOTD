@@ -14,15 +14,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Your app name",
-  description: "Your app description",
+  title: "OOTD",
+  description: "The fast fashion industry encourages impulsive buying, leading to overconsumption and massive textile waste. Many people purchase clothes without considering their long-term value, often discarding them after minimal use. We were inspired to create OOTD to shift this mindset by promoting thoughtful purchasing habits. OOTD helps users make mindful decisions with an AI-powered virtual try-on tool that reduces unnecessary purchases. At the same time, it provides a fun, engaging way to discover new clothes, get outfit inspiration, and explore sustainable fashion options—making conscious shopping both easy and exciting.",
   manifest: "/manifest.json",
   themeColor: [{ media: "(prefers-color-scheme: dark)", color: "#000000" }],
   viewport:
     "minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no, viewport-fit=cover",
   icons: [
-    { rel: "apple-touch-icon", url: "icon-192x192.png" },
-    { rel: "icon", url: "icon-192x192.png" },
+    { rel: "apple-touch-icon", url: "/icon-192x192.jpg" },
+    { rel: "icon", url: "/icon-192x192.jpg" },
   ],
 };
 
